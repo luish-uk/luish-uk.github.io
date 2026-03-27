@@ -1,24 +1,33 @@
-import sqlite3
+import psycopg2
+
+def conn():
+    connect = psycopg2.connect(
+        dbname="history_ntbx",
+        user="history_ntbx_user",
+        password="REMOVED",
+        host="REMOVED",
+        port="5432"
+    )
+    return connect
 
 
 def init_db():
     """
     Initilizes database if it does not already exist
     """
-
-    connect = sqlite3.connect("history.db")
+    connect = conn()
     cursor = connect.cursor()
-    cursor.execute("""CREATE TABLE IF NOT EXISTS posts(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, subject TEXT, content TEXT, date TEXT);""")
+    cursor.execute("""CREATE TABLE IF NOT EXISTS posts(id SERIAL PRIMARY KEY, title TEXT, subject TEXT, content TEXT, date TEXT);""")
     connect.commit()
     connect.close()
 
 def insert_post(title, subject, content, date):
     """
-    Inserts post into the SQL database.
+    Inserts post into the Postgres database.
     """
-    connect = sqlite3.connect("history.db")
+    connect = conn()
     cursor = connect.cursor()
-    cmd = "INSERT INTO posts (title, subject, content, date) VALUES (?, ?, ?, ?);"
+    cmd = "INSERT INTO posts (title, subject, content, date) VALUES (%s, %s, %s, %s);"
     cursor.execute(cmd, (title, subject, content, date))
     connect.commit()
     connect.close()
@@ -26,9 +35,9 @@ def insert_post(title, subject, content, date):
 
 def get_posts():
     """
-    Return's posts from the SQL Database using query statements 
+    Return's posts from the Postgres Database using query statements 
     """
-    connect = sqlite3.connect("history.db")
+    connect = conn()
     cursor = connect.cursor()
     cursor.execute(f"SELECT * FROM posts ORDER BY id DESC;")
     results = cursor.fetchall()
