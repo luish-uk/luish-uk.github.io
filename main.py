@@ -1,12 +1,17 @@
 from flask import Flask, render_template, request
 import datetime
 from database import init_db, insert_post, get_posts
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+PASSWORD = os.environ.get("PASSWORD")
 
 app = Flask(__name__)
 
 init_db()
-
-
+print(PASSWORD)
 @app.route("/")
 def hello_world():
     results = get_posts()
@@ -16,15 +21,18 @@ def hello_world():
 def newpost():
     return render_template('new.html')
 
-@app.route("/success", methods=['POST', 'GET'])
-def success():
+@app.route("/submit", methods=['POST', 'GET'])
+def form():
     if request.method == 'POST':
-        post_title = request.form['title']
-        post_subject = request.form['subject']
-        post_content = request.form['content']
-        date = datetime.datetime.now().strftime("%x %I:%M")
-        post = "<article><h2>%s</h2><h3>%s</h3><p>%s</p><footer>%s</footer></article>" % (post_title, post_subject, post_content, date)
-        insert_post(post_title, post_subject, post_content, date)
-    return render_template('success.html')
+        if request.form['password'] == PASSWORD:
+            post_title = request.form['title']
+            post_subject = request.form['subject']
+            post_content = request.form['content']
+            date = datetime.datetime.now().strftime("%H:%M %A %B %d %Y")
+            insert_post(post_title, post_subject, post_content, date)
+            return render_template('success.html')
+        else:
+            return "Unauthorised", 403
 
 
+app.run(host='0.0.0.0', port=5000, debug=True)
