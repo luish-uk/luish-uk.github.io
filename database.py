@@ -8,13 +8,12 @@ load_dotenv()
 DATABASE_URL = os.environ.get("DATABASE_URL")
 DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
 
-
 def conn():
     connect = psycopg2.connect(
         dbname="history_ntbx",
-        user="history_ntbx_user",
-        password="REMOVED",
-        host="REMOVED",
+        user="history_ltd7_user",
+        password=DATABASE_PASSWORD,
+        host=DATABASE_URL,
         port="5432"
     )
     return connect
