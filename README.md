@@ -1,4 +1,4 @@
-# luish-uk.github.io
+# [csstudent.uk](https://csstudent.uk)
 ## What is this? 
 This is my website linked to the domain csstudent.uk, where I hope to update (Semi-frequently) with information about new projects I am building as well as any other cool thing I get up to coding wise. I originally intend for this website to be extremely basic which is why it's full stack is in flask + sqlite. However i want to expand the stack with my experience to hopefully make it into a fully working website. 
 
