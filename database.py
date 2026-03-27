@@ -1,4 +1,13 @@
+import os
 import psycopg2
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
+
 
 def conn():
     connect = psycopg2.connect(
