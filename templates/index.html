@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luis' Blog</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Welcome to Luis' blog</h1>
+    <nav>
+        <a href="/newpost"><button id="newpost">New Post</button></a>
+        <button id="about">About</button>
+    </nav>
+    <br><br>
+    <h2>All posts</h2>
+    {% block posts %}
+    {% for post in posts %}
+    <article>
+        <h3>{{post[1]}}</h3>
+        <h4>{{post[2]}}</h4>
+        <p>{{post[3]}}</p>
+        <footer>{{post[4]}}</footer>
+    </article>
+    {% endfor %}
+    {% endblock %}
+</body>
+</html>

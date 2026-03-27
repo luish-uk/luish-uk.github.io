@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Post!</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <form action="/success" method="POST">
+        <label>Title</label>
+        <input autofocus id="title" name="title">
+        <br>
+        <label>Subject</label>
+        <input id="Subject" name="subject">
+        <br>
+        <label>Message</label>
+        <textarea placeholder="Start typing!" rows="4" cols="50" id="content" name="content"></textarea>
+        <button type="submit">Send!</button>
+    </form>
+</body>
+</html>
