@@ -43,5 +43,5 @@ def form():
         else:
             return "Unauthorised", 403
 
-
-app.run(host='0.0.0.0', port=5000, debug=DEBUG)
+if DEBUG:
+    app.run(host='0.0.0.0', port=5000, debug=DEBUG)
