@@ -1,7 +1,7 @@
 import os
 import psycopg2
 from dotenv import load_dotenv
-
+import logging
 
 load_dotenv()
 
@@ -36,11 +36,18 @@ def insert_post(title, subject, content, date):
     Inserts post into the Postgres database.
     """
     connect = conn()
-    cursor = connect.cursor()
-    cmd = "INSERT INTO posts (title, subject, content, date) VALUES (%s, %s, %s, %s);"
-    cursor.execute(cmd, (title, subject, content, date))
-    connect.commit()
-    connect.close()
+    try:
+        cursor = connect.cursor()
+        cmd = "INSERT INTO posts (title, subject, content, date) VALUES (%s, %s, %s, %s);"
+        cursor.execute(cmd, (title, subject, content, date))
+        connect.commit()
+        return True
+    except Exception as e:
+        connect.rollback()
+        logging.error(f"Python raised an except and failed to insert post, printed error: {e}")
+        return False
+    finally:    
+        connect.close()
 
 
 def get_posts():

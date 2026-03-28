@@ -11,7 +11,7 @@
         <div class="container g-5 justify-content-start">
             <a class="navbar-brand text-decoration-none pr-3" href="/">Home</a>
             <a class="navbar-text text-decoration-none px-3" href="/newpost">New Post</a>
-            <a class="navbar-text text-decoration-none px-3" href="/submit">About</a>
+            <a class="navbar-text text-decoration-none px-3" href="https://luish-uk.github.io/">About</a>
         </div>
     </nav>
     <div class="container g-5">
@@ -21,8 +21,8 @@
         {% block posts %}
         {% for post in posts %}
         <article class="border-bottom border-top">
-            <h4 class="pt-2">{{post[1]}}</h3>
-            <h6>{{post[2]}}</h4>
+            <h4 class="pt-2">{{post[1]}}</h4>
+            <h6>{{post[2]}}</h6>
             <p>{{post[3]}}</p>
             <footer class="pb-2">{{post[4]}}</footer>
         </article>

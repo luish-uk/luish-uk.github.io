@@ -1,30 +1,39 @@
-from flask import Flask, render_template, request
-import datetime
-from database import init_db, insert_post, get_posts
-from dotenv import load_dotenv
+from flask import Flask, render_template, request #Used as the frontend/backend
+import datetime #For date and time of posts 
+from database import init_db, insert_post, get_posts #Database of posts
+from dotenv import load_dotenv 
 import os
+import hmac #For avoiding timing attacks
+import logging
 
-load_dotenv()
+logging.basicConfig(filename='app.log', level=logging.ERROR) #Adding log file
+
+load_dotenv() 
+
+#Initilize .env
 
 PASSWORD = os.environ.get("PASSWORD")
+DEBUG = os.environ.get("DEBUG")
 
 app = Flask(__name__)
 
-init_db()
-print(PASSWORD)
+init_db() #Runs db setup 
+
+
+
 @app.route("/")
 def hello_world():
     results = get_posts()
     return render_template('index.html', posts=results)
 
-@app.route("/newpost", methods=['POST', 'GET'])
+@app.route("/newpost", methods=['GET'])
 def newpost():
     return render_template('new.html')
 
 @app.route("/submit", methods=['POST', 'GET'])
 def form():
     if request.method == 'POST':
-        if request.form['password'] == PASSWORD:
+        if hmac.compare_digest(request.form['password'], PASSWORD): 
             post_title = request.form['title']
             post_subject = request.form['subject']
             post_content = request.form['content']
@@ -35,4 +44,4 @@ def form():
             return "Unauthorised", 403
 
 
-#app.run(host='0.0.0.0', port=5000, debug=True)
+app.run(host='0.0.0.0', port=5000, debug=DEBUG)

@@ -8,13 +8,13 @@
             },
             "ssh": "Disabled",
             "previewLimit": 50,
-            "server": "REMOVED",
+            "server": "dpg-d73q8vtactks7383j24g-a.frankfurt-postgres.render.com",
             "port": 5432,
             "askForPassword": true,
             "driver": "PostgreSQL",
-            "name": "dpg-d7376f63jp1c738rklt0-a",
-            "username": "history_ntbx_user",
-            "database": "history_ntbx"
+            "name": "history",
+            "username": "history_ii71_user",
+            "database": "history_ii71"
         }
     ]
 }
