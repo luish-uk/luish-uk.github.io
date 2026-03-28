@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+DATABASE_NAME = os.environ.get("DATABASE_NAME")
+DATABASE_USERNAME = os.environ.get("DATABASE_USERNAME")
 DATABASE_URL = os.environ.get("DATABASE_URL")
 DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
 
