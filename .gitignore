@@ -9,3 +9,5 @@ __pycache__/
 .log
 *.log
 .log.*
+.DS_STORE
+.vscode
