@@ -12,8 +12,8 @@ DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
 
 def conn():
     connect = psycopg2.connect(
-        dbname="history_ntbx",
-        user="history_ltd7_user",
+        dbname=DATABASE_NAME,
+        user=DATABASE_USERNAME,
         password=DATABASE_PASSWORD,
         host=DATABASE_URL,
         port="5432"
