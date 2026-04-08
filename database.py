@@ -49,14 +49,13 @@ def insert_post(title, subject, content, date):
     finally:    
         connect.close()
 
-
 def get_posts():
     """
     Return's posts from the Postgres Database using query statements 
     """
     connect = conn()
     cursor = connect.cursor()
-    cursor.execute(f"SELECT * FROM posts ORDER BY id DESC;")
+    cursor.execute(f"SELECT id, title, subject, content, date, ROW_NUMBER() OVER (ORDER BY id) AS day_number FROM posts ORDER BY id DESC;")
     results = cursor.fetchall()
     connect.close()
     return results
