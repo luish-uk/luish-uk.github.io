@@ -1,1 +1,0 @@
-UPDATE posts SET title = 'Day004' WHERE id=6;

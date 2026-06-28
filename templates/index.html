@@ -24,7 +24,7 @@
         <article class="border-bottom border-top">
             <h4 class="pt-2">{{post[1]}}</h4>
             <h6>{{post[2]}}</h6>
-            <p>{{post[3]}}</p>
+            <p>{{post[3] | replace('\n', '<br>') | safe}}</p>
             <footer class="pb-2">{{post[4]}} - Day {{post[5]}} of 1000</footer>
         </article>
         {% endfor %}
