@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 import hmac #For avoiding timing attacks
 import logging
+import zoneinfo
 
 logging.basicConfig(filename='app.log', level=logging.ERROR) #Adding log file
 
@@ -37,7 +38,7 @@ def form():
             post_title = request.form['title']
             post_subject = request.form['subject']
             post_content = request.form['content']
-            date = datetime.datetime.now().strftime("%H:%M %A %B %d %Y")
+            date = datetime.datetime.now(zoneinfo.ZoneInfo("Europe/London")).strftime("%H:%M %A %B %d %Y")
             insert_post(post_title, post_subject, post_content, date)
             return render_template('success.html')
         else:
